@@ -6,4 +6,7 @@ Rails.application.routes.draw do
 
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'
+
+  # Mount Engines
+  mount Api::Engine => '/api', as: 'api'
 end
