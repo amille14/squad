@@ -1,0 +1,2 @@
+class SquadUser < ApplicationRecord
+end

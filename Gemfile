@@ -31,4 +31,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Engines
 #===============
-gem 'api', path: 'api'
+gem 'squad_api', path: 'components/squad_api'

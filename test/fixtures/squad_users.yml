@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  squad_id: 1
+  user_id: 1
+  title: MyString
+  cred: 1
+  permissions: 1
+
+two:
+  squad_id: 1
+  user_id: 1
+  title: MyString
+  cred: 1
+  permissions: 1

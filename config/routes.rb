@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   # Mount Engines
-  mount Api::Engine => '/api', as: 'api'
+  mount SquadApi::Engine => '/api', as: 'squad_api'
 end
