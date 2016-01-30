@@ -8,5 +8,9 @@ class CreateRoomUsers < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+
+    add_index :room_users, :room_id
+    add_index :room_users, [:user_id, :room_id]
+    add_index :room_users, [:room_id, :permissions]
   end
 end

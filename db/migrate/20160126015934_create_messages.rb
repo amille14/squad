@@ -5,9 +5,13 @@ class CreateMessages < ActiveRecord::Migration[5.0]
       t.integer :post_id
       t.integer :room_id
       t.timestamp :edited_at
-      t.string :content
+      t.text :content
 
       t.timestamps
     end
+
+    add_index :messages, :post_id
+    add_index :messages, :room_id
+    add_index :messages, :user_id
   end
 end
