@@ -1,4 +1,6 @@
 class SquadUser < ApplicationRecord
+  belongs_to :squad, inverse_of: :squad_users
+  belongs_to :user, inverse_of: :squad_users
 
   # Reader - Read only
   # Member - Read, write
