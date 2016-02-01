@@ -1,0 +1,1 @@
+json.partial! 'squad_api/squads/squad', squad: @squad

@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   # Mount Engines
-  mount SquadApi::Engine => '/api', as: 'squad_api'
+  namespace :api, defaults: {format: 'json'} do
+    mount SquadApi::Engine => '/', as: 'squad_api'
+  end
 end

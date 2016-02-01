@@ -5,6 +5,7 @@ class CreateRooms < ActiveRecord::Migration[5.0]
       t.string :description
       t.integer :squad_id
       t.integer :user_id
+      t.boolean :is_editable, null: false, default: true
 
       t.timestamps
     end
