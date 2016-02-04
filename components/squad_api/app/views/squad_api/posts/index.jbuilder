@@ -1,0 +1,1 @@
+json.partial! 'squad_api/posts/post', collection: @posts, as: :post

@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
 
-  root to: "rooms#show"
+  # root to: redirect(subdomain: "app", path: "/")
+  # constraints subdomain: "app" do
+  # ...
+  # end
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: "squads#bootstrap"
+  resources :squads, only: [:index, :show, :create]
 
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'

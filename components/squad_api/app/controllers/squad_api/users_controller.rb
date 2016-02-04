@@ -12,6 +12,7 @@ class SquadApi::UsersController < SquadApi::BaseController
   end
 
   def update
+    # TODO: Update both user and squad_user
   end
 
 private
@@ -21,5 +22,13 @@ private
 
   def find_user
     @user = User.includes(:squad_users).find(params[:id])
+  end
+
+  # TODO: Strong params for users
+  def user_params
+  end
+
+  # TODO: Strong params for squad_users
+  def squad_user_params
   end
 end

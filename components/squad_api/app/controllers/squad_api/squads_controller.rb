@@ -5,13 +5,18 @@ class SquadApi::SquadsController < SquadApi::BaseController
     respond_to :json
   end
 
-  def create
-  end
-
   def update
   end
 
   def delete
+  end
+
+  def add_user
+    @squad.add_user params[:user_id], params[:permissions]
+  end
+
+  def remove_user
+    @squad.remove_user params[:user_id]
   end
 
 private

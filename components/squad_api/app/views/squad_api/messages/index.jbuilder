@@ -1,0 +1,1 @@
+json.partial! 'squad_api/messages/message', collection: @messages, as: :message
