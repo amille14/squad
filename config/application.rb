@@ -13,5 +13,9 @@ module SquadApp
     # -- all .rb files in that directory are automatically loaded.
 
     config.browserify_rails.commandline_options = "-t coffeeify --extension=\".coffee\""
+
+    config.generators do |g|
+      g.template_engine :haml
+    end
   end
 end

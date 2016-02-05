@@ -2,9 +2,8 @@ BOOTSTRAP
 
 - content_for :javascript do
   :coffeescript
-    $(document).ready ->
+    @Squadd = @Squadd ? require("assets/javascripts/squadd_app")
+
+    $(document).ready =>
       data = #{ json_escape(render(partial: "bootstrap", locals: { user: @current_user, squad: @squad, rooms: @squad.rooms }, formats: :json)) }
-
-      console.log data
-
-      # SquaddApp.start data
+      Squadd.app = new Squadd.App(data)

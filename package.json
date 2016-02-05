@@ -1,9 +1,12 @@
 {
   "name": "Squadd",
-  "dependencies" : {
+  "dependencies": {
     "browserify": "~> 10.2.4",
     "browserify-incremental": "^3.0.1",
-    "coffeeify": "~> 0.6"
+    "coffeeify": "~> 0.6",
+    "react": "^0.14.7",
+    "react-redux": "^4.3.0",
+    "redux": "^3.2.1"
   },
   "license": "MIT",
   "engines": {
@@ -12,5 +15,8 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/amille14/squadd.git"
+  },
+  "devDependencies": {
+    "redux-devtools": "^3.1.0"
   }
 }
