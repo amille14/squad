@@ -1,1 +1,10 @@
 BOOTSTRAP
+
+- content_for :javascript do
+  :coffeescript
+    $(document).ready ->
+      data = #{ json_escape(render(partial: "bootstrap", locals: { user: @current_user, squad: @squad, rooms: @squad.rooms }, formats: :json)) }
+
+      console.log data
+
+      # SquaddApp.start data

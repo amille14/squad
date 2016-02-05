@@ -34,6 +34,8 @@ protected
   end
 
   def find_current_user
+    # TODO: Change when devise is implemented
     # @current_user = current_user
+    @current_user = User.find(1)
   end
 end

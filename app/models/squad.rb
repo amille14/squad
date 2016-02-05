@@ -16,8 +16,8 @@ class Squad < ApplicationRecord
     # TODO: Come up with better default description copy.
     self.rooms.create!(name: "general", description: "A room for general discussion.", is_editable: false)
 
-    if self.is_public
-      self.rooms.create!(name: "public", description: "A window to the oustide world. This room is publicly accessible.", is_editable: false, is_public: true)
+    unless self.is_private
+      self.rooms.create!(name: "public", description: "A window to the oustide world. This room is publicly accessible.", is_editable: false, is_private: false)
     end
   end
 

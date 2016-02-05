@@ -1,8 +1,6 @@
 class SquadsController < ApplicationController
   before_action :find_current_user
 
-  layout "squads"
-
   def index
     @squads = @current_user.squads
     respond_to :html
@@ -33,6 +31,7 @@ class SquadsController < ApplicationController
 
 private
   def find_current_user
+    # TODO: Change this after devise is implemented
     # @current_user = current_user
     @current_user = User.find(1)
   end
