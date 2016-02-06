@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   has_many :messages, inverse_of: :post
 
   belongs_to :room, inverse_of: :posts
-  belongs_to :creator, class_name: "User", inverse_of: :posts
+  belongs_to :creator, class_name: "User", foreign_key: :user_id, inverse_of: :posts
 
   before_save :set_edited_at, if: lambda { |p| p.title_changed? or p.link_changed? or p.content_changed? }
 

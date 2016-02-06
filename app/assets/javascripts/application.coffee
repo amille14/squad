@@ -13,4 +13,6 @@
 #= require jquery
 #= require jquery_ujs
 #= require turbolinks
+#= require alt
+#= require squadd_app
 #= require_tree .

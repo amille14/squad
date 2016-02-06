@@ -1,9 +1,9 @@
-BOOTSTRAP
+#nav NAV
+#sidebar SIDEBAR
+#main MAIN
 
 - content_for :javascript do
   :coffeescript
-    @Squadd = @Squadd ? require("assets/javascripts/squadd_app")
-
     $(document).ready =>
       data = #{ json_escape(render(partial: "bootstrap", locals: { user: @current_user, squad: @squad, rooms: @squad.rooms }, formats: :json)) }
-      Squadd.app = new Squadd.App(data)
+      Squadd.App.bootstrap(data)
