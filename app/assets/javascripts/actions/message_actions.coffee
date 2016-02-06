@@ -1,5 +1,7 @@
 alt = require("../alt")
 
+# TODO: Change this to use alt sources http://alt.js.org/docs/async/
+
 urlRoot = ->
   squad = Squadd.App.getCurrentSquad()
   room  = Squadd.App.getCurrentRoom()
@@ -13,11 +15,15 @@ class MessageActions
 
     return (dispatch) =>
       dispatch()
-      return $.getJSON(url)
-        .then(@update.bind(@))
-        .fail(@fetchError.bind(@))
 
-  update: (messages) -> messages
-  fetchError: (response) -> response
+      $.getJSON
+        url: url
+        success: (response) => @update(response)
+        error: (response) => @error(response)
+
+  update: (messages) -> return messages
+  error: (response) ->
+    console.log 'BLAH', response
+    return response
 
 module.exports = alt.createActions(MessageActions)

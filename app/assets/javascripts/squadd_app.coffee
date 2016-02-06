@@ -21,7 +21,7 @@ class SquaddApp
     #   users:  UsersStore.bootstrap([data.current_user])
     #   rooms:  RoomsStore.bootstrap(data.rooms)
 
-    MessagesActions.fetch()
+    MessagesActions.fetch(1)
 
   # TODO: Change this to use stores
   getCurrentSquad: ->
