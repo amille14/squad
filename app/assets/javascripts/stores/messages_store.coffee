@@ -1,31 +1,37 @@
 alt = require("../alt")
-actions = require("../actions/message_actions")
+MessageActions = require("../actions/message_actions")
+MessageSource = require("../sources/message_source")
 
 class MessagesStore
   constructor: ->
-    @messages = []
-    @errors = null
+    @state =
+      list: []
+      errors: null
+
+    @registerAsync(MessageSource)
 
     @bindListeners
-      handleFetch:  actions.FETCH
-      handleUpdate: actions.UPDATE
-      handleError:  actions.ERROR
+      onFetchList:        MessageActions.FETCH_LIST
+      onLoading:          MessageActions.LOADING
+      onFetchListSuccess: MessageActions.FETCH_LIST_SUCCESS
+      onFetchListError:   MessageActions.FETCH_LIST_ERROR
 
-  # Reset messages to empty while fetching so view knows to render loading spinner
-  handleFetch: ->
+  onFetchList: (postId) ->
     console.log "FETCH"
-    @messages = []
-    @errors = null
+    @getInstance().fetchList() unless @getInstance().isLoading()
 
-  # Update the store and unset errors
-  handleUpdate: (messages) ->
-    console.log "UPDATE", messages
-    @messages = messages
-    @errors = null
+  onLoading: ->
+    console.log "LOADING"
+    @state.list = []
+    @state.errors = null
 
-  # Set errors
-  handleError: (response) ->
+  onFetchListSuccess: (messages) ->
+    console.log "SUCCESS", messages
+    @state.list = messages
+    @state.errors = null
+
+  onFetchListError: (response) ->
     console.log "ERROR", response
-    @errors = response
+    @state.errors = response
 
 module.exports = alt.createStore MessagesStore, "MessagesStore"

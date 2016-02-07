@@ -1,6 +1,7 @@
 {
   "name": "Squadd",
   "dependencies": {
+    "axios": "^0.9.1",
     "browserify": "~> 10.2.4",
     "browserify-incremental": "^3.0.1",
     "coffeeify": "~> 0.6",

@@ -1,29 +1,30 @@
 alt = require("../alt")
 
-# TODO: Change this to use alt sources http://alt.js.org/docs/async/
-
-urlRoot = ->
-  squad = Squadd.App.getCurrentSquad()
-  room  = Squadd.App.getCurrentRoom()
-  return "/api/squads/#{squad.id}/rooms/#{room.id}"
 
 class MessageActions
-  fetch: (postId) ->
-    url = urlRoot()
-    url += "/posts/#{postId}" if postId?
-    url += "/messages"
+  constructor: ->
+    @generateActions "fetchList", "loading", "fetchListSuccess", "fetchListError"
 
-    return (dispatch) =>
-      dispatch()
+  # fetch: (postId) ->
+  #   url = urlRoot()
+  #   url += "/posts/#{postId}" if postId?
+  #   url += "/messages"
 
-      $.getJSON
-        url: url
-        success: (response) => @update(response)
-        error: (response) => @error(response)
+  #   return (dispatch) =>
+  #     dispatch()
 
-  update: (messages) -> return messages
-  error: (response) ->
-    console.log 'BLAH', response
-    return response
+  #     $.getJSON
+  #       url: url
+  #       success: (response) => @update(response)
+  #       error: (response) => @error(response)
+
+  # update: (messages) -> return messages
+  # error: (response) ->
+  #   console.log 'BLAH', response
+  #   return response
+  # fetch: (postId) -> return postId
+  # loading: -> return
+  # fetchListSuccess: (response) -> return response
+  # fetchListError:   (response) -> return response
 
 module.exports = alt.createActions(MessageActions)

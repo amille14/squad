@@ -6,4 +6,4 @@
   :coffeescript
     $(document).ready =>
       data = #{ json_escape(render(partial: "bootstrap", locals: { user: @current_user, squad: @squad, rooms: @squad.rooms }, formats: :json)) }
-      Squadd.App.bootstrap(data)
+      Squadd.bootstrap(data)
