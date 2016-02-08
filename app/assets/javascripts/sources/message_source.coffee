@@ -1,7 +1,6 @@
 MessageActions = require('../actions/message_actions')
 
 MessageSource =
-
   fetchList:
     remote: (state) ->
       squadId = Squadd.getSquad()?.id
@@ -16,13 +15,17 @@ MessageSource =
       url += "/posts/#{postId}" if postId?
       url += "/messages"
 
-      console.log "GET #{url}"
+      return Squadd.api.get(url)
 
-      Squadd.api.get(url)
+    # local: (state) ->
+    #   roomId = Squadd.getCurrentId("room")
+    #   postId = Squadd.getCurrentId("post")
+    #   if postId?
+    #     list = state.by["post_id"]?[postId]
+    #   else
+    #     list = state.by["room_id"]?[roomId]
+    #   if typeof(list) is "object" then return list else return null
 
-    # local: (state) -> # TODO
-
-    loading: MessageActions.loading
     success: MessageActions.fetchListSuccess
     error:   MessageActions.fetchListError
 

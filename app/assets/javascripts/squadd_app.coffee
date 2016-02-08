@@ -12,8 +12,7 @@ MessageActions = require("./actions/message_actions")
 class SquaddApp
   constructor: ->
     # TODO: Change baseUrl based on ENV
-    @api = 
-      baseUrl: "http://localhost:3000/api/"
+    @api = axios.create(baseURL: "http://localhost:3000/api/")
 
   bootstrap: (data) ->
     console.log "BOOTSTRAP", data
@@ -30,7 +29,7 @@ class SquaddApp
         list: data.rooms
     )
 
-    MessageActions.fetchList(1)
+    MessageActions.fetchList()
 
   getSquad: -> SquadStore.getState()
 
