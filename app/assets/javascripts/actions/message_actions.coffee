@@ -2,7 +2,7 @@ alt = require("../alt")
 
 class MessageActions
   constructor: ->
-    @generateActions "fetchList", "fetchListSuccess", "fetchListError"
+    @generateActions "fetchList", "fetchSuccess", "fetchError"
 
 
 module.exports = alt.createActions(MessageActions)

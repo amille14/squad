@@ -1,5 +1,5 @@
 class CollectionStore
-  constructor: (source, actions) ->
+  constructor: (source, actions, hasItemActions = false) ->
     # Public state
     @list = []
     @by = {}
@@ -10,9 +10,11 @@ class CollectionStore
     @_indexes = ["id"]  # Override this to add additional indexes
 
     @bindListeners
-      onFetchList:        actions.FETCH_LIST
-      onFetchListSuccess: actions.FETCH_LIST_SUCCESS
-      onFetchListError:   actions.FETCH_LIST_ERROR
+      onFetchList:    actions.FETCH_LIST
+      onFetchSuccess: actions.FETCH_SUCCESS
+      onFetchError:   actions.FETCH_ERROR
+
+    @bindListeners(onFetchItem: actions.FETCH_ITEM) if hasItemActions
 
     @registerAsync(source)
 
@@ -23,14 +25,15 @@ class CollectionStore
   #==================
 
   indexList: (items = @list) ->
-    for item in items
-      for index in @_indexes
-        @by[index] ||= {}
-        if index is "id"
-          @by[index][item[index]] = item if item[index]?
-        else
-          @by[index][item[index]] ||= {}
-          @by[index][item[index]][item.id] = item
+    if items?
+      for item in items
+        for index in @_indexes
+          @by[index] ||= {}
+          if index is "id"
+            @by[index][item[index]] = item if item[index]?
+          else
+            @by[index][item[index]] ||= {}
+            @by[index][item[index]][item.id] = item
 
   isLoading: ->
     @loadingCount > 0
@@ -40,21 +43,27 @@ class CollectionStore
   #===================
 
   onFetchList: (options = {}) ->
-    console.log "FETCH", options
+    console.log "FETCH LIST", options
     @loadingCount += 1
     if options.reset
       @list = []
       @by = {}
     @getInstance().fetchList(options)
 
-  onFetchListSuccess: (response) ->
+  onFetchItem: (id) ->
+    console.log "FETCH ITEM", id
+    @loadingCount += 1
+    @getInstance().fetchItem(id)
+
+  onFetchSuccess: (response) ->
     console.log "SUCCESS", response
-    @indexList(response.data)
+    data = if _.isArray(response.data) then response.data else [response.data]
+    @indexList(data)
     @list = _.values(@by.id)
     @errors = null
     @loadingCount -= 1
 
-  onFetchListError: (response) ->
+  onFetchError: (response) ->
     console.log "ERROR", response
     @errors = response ? "Something went wrong"
     @loadingCount -= 1

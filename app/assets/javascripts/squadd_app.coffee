@@ -6,7 +6,12 @@ UsersStore = require("./stores/users_store")
 RoomsStore = require("./stores/rooms_store")
 PostsStore = require("./stores/posts_store")
 MessagesStore = require("./stores/messages_store")
+
 MessageActions = require("./actions/message_actions")
+UserActions = require("./actions/user_actions")
+RoomActions = require("./actions/room_actions")
+PostActions = require("./actions/post_actions")
+SquadActions = require("./actions/squad_actions")
 
 
 class SquaddApp
@@ -18,18 +23,17 @@ class SquaddApp
     console.log "BOOTSTRAP", data
 
     alt.bootstrap JSON.stringify(
-      SquadStore:
-        id: data.squad.id
-        name: data.squad.name
-      UsersStore:
-        currentId: data.current_user.id
-        list: data.squad.users
-      RoomsStore:
-        currentId: data.rooms[0]?.id
-        list: data.rooms
+      SquadStore: _.extend({}, SquadStore.getState(), {id: data.squad.id, name: data.squad.name})
+      UsersStore: _.extend({}, UsersStore.getState(), {currentId: data.current_user.id, list: [data.current_user]})
+      RoomsStore: _.extend({}, RoomsStore.getState(), {currentId: data.rooms[0]?.id, list: data.rooms})
     )
 
-    MessageActions.fetchList()
+    # MessageActions.fetchList()
+    # PostActions.fetchList()
+    # UserActions.fetchList()
+    # UserActions.fetchItem(2)
+    # RoomActions.fetchList()
+    # RoomActions.fetchItem(2)
 
   getSquad: -> SquadStore.getState()
 

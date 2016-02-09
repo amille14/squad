@@ -1,8 +1,8 @@
 alt = require("../alt")
 
-class UserActions
+class PostActions
   constructor: ->
     @generateActions "fetchList", "fetchItem", "fetchSuccess", "fetchError"
 
 
-module.exports = alt.createActions(UserActions)
+module.exports = alt.createActions(PostActions)
